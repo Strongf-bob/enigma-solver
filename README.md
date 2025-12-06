@@ -63,7 +63,7 @@ enigma-bombe-project/
 
 ## How It Works
 
-### Enigma Machine 🔄
+### Enigma Machine 
 
 The encryption signal flows through:
 
@@ -156,11 +156,11 @@ Reflector:      YRUHQSLDPXNGOKMIEBFZCWVJAT
 
 This simulator teaches:
 
-- ✅ **Cryptography fundamentals** — how encryption algorithms work
-- ✅ **Cryptanalysis techniques** — breaking codes using weaknesses
-- ✅ **Algorithm optimization** — efficient brute-force searching
-- ✅ **Computing history** — early automated cryptanalysis machines
-- ✅ **Mathematical logic** — rotor stepping and signal flow
+- **Cryptography fundamentals** — how encryption algorithms work
+- **Cryptanalysis techniques** — breaking codes using weaknesses
+- **Algorithm optimization** — efficient brute-force searching
+- **Computing history** — early automated cryptanalysis machines
+- **Mathematical logic** — rotor stepping and signal flow
 
 ***
 
@@ -176,7 +176,7 @@ The Enigma was thought **unbreakable** by the Nazis, but the Bombe proved them w
 
 ## Repository
 
-📍 **GitHub:** [github.com/Strongf-bob/enigma-solver](https://github.com/Strongf-bob/enigma-solver)
+**GitHub:** [github.com/Strongf-bob/enigma-solver](https://github.com/Strongf-bob/enigma-solver)
 
 ***
 
@@ -193,13 +193,13 @@ The Enigma was thought **unbreakable** by the Nazis, but the Bombe proved them w
 
 ***
 
-## 📜 License
+## License
 
 This is an **educational project** created for **portfolio purposes**. Use freely for learning and teaching cryptography!
 
 ***
 
-## 📖 References
+## References
 
 1. **Turing, A. M.** (1936). *"On Computable Numbers"* — Proceedings of the London Mathematical Society
 2. **Welchley, G.** (1946). *"From Polish Bomba to British Bombe"* — History of Computing Project
