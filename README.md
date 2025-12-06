@@ -1,27 +1,25 @@
-<img src="https://r2cdn.perplexity.ai/pplx-full-logo-primary-dark%402x.png" style="height:64px;margin-right:32px"/>
-
-# 🔐 Enigma Bombe Solver
+# Enigma Bombe Solver
 
 > A modern software simulation of Alan Turing's legendary Bombe machine — breaking Enigma encryption through cryptanalysis
 
 ***
 
-## 📖 Overview
+## Overview
 
 This project is an **interactive cryptography simulator** that demonstrates how the Enigma machine worked and how the Bombe algorithm cracked it during WWII.
 
 
 | Feature | Description |
 | :-- | :-- |
-| 🔐 **Enigma Simulation** | Authentic 3-rotor encryption machine with historical wiring |
-| 🎯 **Bombe Cracking** | Brute-force cryptanalysis using known plaintext attacks |
-| 🌐 **Web Interface** | No installation needed — just open `index.html` in a browser |
-| 📚 **Educational** | Learn about cryptography, algorithms, and computing history |
+| **Enigma Simulation** | Authentic 3-rotor encryption machine with historical wiring |
+| **Bombe Cracking** | Brute-force cryptanalysis using known plaintext attacks |
+| **Web Interface** | No installation needed — just open `index.html` in a browser |
+| **Educational** | Learn about cryptography, algorithms, and computing history |
 
 
 ***
 
-## 🚀 Quick Start
+## Quick Start
 
 **Just open `index.html` in your web browser — that's it!**
 
@@ -29,7 +27,7 @@ No Python installation, no server setup required. The entire application runs di
 
 ```
 enigma-bombe-project/
-├── 📄 index.html           ← Open this in your browser!
+├── index.html           ← Open this in your browser!
 ├── README.md               ← This file
 ├── enigma.py               ← Python Enigma implementation (optional)
 ├── bombe.py                ← Python Bombe solver (optional)
@@ -39,9 +37,9 @@ enigma-bombe-project/
 
 ***
 
-## 🎮 Features
+## Features
 
-### 🔐 Enigma Encryption Tab
+### Enigma Encryption Tab
 
 - **Configure rotor settings** (III, II, I)
 - **Set rotor positions** (AAA to ZZZ)
@@ -49,7 +47,7 @@ enigma-bombe-project/
 - **Real-time encryption** of plaintext to ciphertext
 
 
-### 🎯 Bombe Cracking Tab
+### Bombe Cracking Tab
 
 - **Input ciphertext** you want to crack
 - **Provide known plaintext** (crib) fragment
@@ -58,7 +56,7 @@ enigma-bombe-project/
 - **View all valid solutions** instantly
 
 
-### 📖 Instructions Tab
+### Instructions Tab
 
 - **Step-by-step guide** with examples
 - **Historical context** about the Enigma machine
@@ -66,7 +64,7 @@ enigma-bombe-project/
 
 ***
 
-## 💡 How It Works
+## How It Works
 
 ### Enigma Machine 🔄
 
@@ -81,9 +79,9 @@ Plain Text
        ↓
 ┌─────────────────────────────────────┐
 │  Rotor I → Rotor II → Rotor III     │  (character substitution)
-│              ↓                       │
+│              ↓                      │
 │         Reflector ←                 │  (bounces signal back)
-└──────┬────────────────────────────┘
+└──────┬──────────────────────────────┘
        ↓
 ┌─────────────┐
 │  Plugboard  │  (swap back)
@@ -94,7 +92,7 @@ Plain Text
 
 Each rotor contains **26 internal wiring connections** that scramble the signal. The rotors rotate with each keystroke, creating an enormously complex encryption system.
 
-### Bombe Algorithm 🎯
+### Bombe Algorithm 
 
 The Bombe exploits weaknesses by testing combinations:
 
@@ -107,7 +105,7 @@ The Bombe exploits weaknesses by testing combinations:
 
 ***
 
-## 📊 Example: Encrypt \& Crack
+## Example: Encrypt \& Crack
 
 ### Encryption Example
 
@@ -130,7 +128,7 @@ The Bombe exploits weaknesses by testing combinations:
 
 ***
 
-## 🔧 Technical Details
+## Technical Details
 
 ### Historical Rotor Wirings
 
@@ -146,18 +144,18 @@ Reflector:      YRUHQSLDPXNGOKMIEBFZCWVJAT
 
 ### Performance Metrics
 
-| Metric | Value |
-| :-- | :-- |
-| **Search Space** | 17,576 positions |
-| **Time per check** | O(1) constant |
-| **Total positions** | 26³ |
-| **Rotor combinations** | 6 (3!) |
-| **Max configurations** | 105,456 |
+| Metric                 | Value            |
+| :--                    | :--              |
+| **Search Space**       | 17,576 positions |
+| **Time per check**     | O(1) constant    |
+| **Total positions**    | 26³              |
+| **Rotor combinations** | 6 (3!)           |
+| **Max configurations** | 105,456          |
 
 
 ***
 
-## 📚 Educational Value
+## Educational Value
 
 This simulator teaches:
 
@@ -169,7 +167,7 @@ This simulator teaches:
 
 ***
 
-## 🏛️ Historical Context
+## Historical Context
 
 > **Alan Turing and the Bletchley Park team** (1940–1945)
 
@@ -179,21 +177,21 @@ The Enigma was thought **unbreakable** by the Nazis, but the Bombe proved them w
 
 ***
 
-## 🔗 Repository
+## Repository
 
 📍 **GitHub:** [github.com/Strongf-bob/enigma-solver](https://github.com/Strongf-bob/enigma-solver)
 
 ***
 
-## 👤 Author
+## Author
 
-| Field | Details |
-| :-- | :-- |
-| **Name** | Karsakov Ilya Vyacheslavovich |
-| **Year** | 2025 |
-| **GitHub** | [@Strongf-bob](https://github.com/Strongf-bob) |
-| **Email** | karsakovillya@yandex.ru |
-| **Telegram** | [@nicto999](https://t.me/nicto999) |
+| Field        | Details                                        |
+| :--          | :--                                            |
+| **Name**     | Karsakov Ilya Vyacheslavovich                  |
+| **Year**     | 2025                                           |
+| **GitHub**   | [@Strongf-bob](https://github.com/Strongf-bob) |
+| **Email**    | karsakovillya@yandex.ru                        |
+| **Telegram** | [@nicto999](https://t.me/nicto999)             |
 
 
 ***
@@ -211,28 +209,17 @@ This is an **educational project** created for **portfolio purposes**. Use freel
 3. **Gannon, P.** (2006). *"Colossus: Bletchley Park's Greatest Secret and the Birth of the Modern Computer"*
 4. **The National Museum of Computing** — *"The Enigma Machine and the Bombe"*
 
-***
-
-## 🤝 Contribute \& Contact
-
-Found a bug? Have an improvement idea? Feel free to reach out:
-
-- 💬 **Telegram:** [@nicto999](https://t.me/nicto999)
-- 📧 **Email:** karsakovillya@yandex.ru
-- 💻 **GitHub:** [Strongf-bob](https://github.com/Strongf-bob)
 
 ***
 
 <div align="center">
-
-**Decrypting History, One Rotor at a Time** 🔐
 
 *Learn cryptography by breaking the unbreakable.*
 
 </div>
 <span style="display:none">[^1][^2]</span>
 
-<div align="center">⁂</div>
+<div align="center"></div>
 
 [^1]: https://github.com/Strongf-bob/enigma-solver
 
