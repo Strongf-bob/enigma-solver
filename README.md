@@ -27,11 +27,8 @@ No Python installation, no server setup required. The entire application runs di
 
 ```
 enigma-bombe-project/
-├── index.html           ← Open this in your browser!
-├── README.md               ← This file
-├── enigma.py               ← Python Enigma implementation (optional)
-├── bombe.py                ← Python Bombe solver (optional)
-└── rotor_configs.py        ← Historical rotor configurations
+├── index.html              ← Open this in your browser!
+└── README.md               ← This file
 ```
 
 
