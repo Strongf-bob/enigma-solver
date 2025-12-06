@@ -12,7 +12,7 @@ This project is an **interactive cryptography simulator** that demonstrates how 
 | Feature | Description |
 | :-- | :-- |
 | **Enigma Simulation** | Authentic 3-rotor encryption machine with historical wiring |
-| **Bombe Cracking** | Brute-force cryptanalysis using known plaintext attacks |
+| **Bombe Cracking**    | Brute-force cryptanalysis using known plaintext attacks |
 | **Web Interface** | No installation needed — just open `index.html` in a browser |
 | **Educational** | Learn about cryptography, algorithms, and computing history |
 
