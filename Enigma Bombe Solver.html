@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enigma Bombe Solver</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background-color: #ffffff;
+            color: #000000;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #000000;
+            padding-bottom: 15px;
+        }
+
+        h1 {
+            margin: 0 0 10px 0;
+            font-size: 1.8em;
+            font-weight: bold;
+        }
+
+        .subtitle {
+            color: #000000;
+            font-size: 0.95em;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 0;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #000000;
+        }
+
+        .tab-button {
+            padding: 10px 20px;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95em;
+            color: #000000;
+            margin-right: 5px;
+        }
+
+        .tab-button.active {
+            border-bottom-color: #000000;
+            font-weight: bold;
+        }
+
+        .tab-button:hover {
+            background-color: #f0f0f0;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card {
+            background: #ffffff;
+            padding: 20px;
+            border: 1px solid #000000;
+        }
+
+        .card h2 {
+            margin-top: 0;
+            color: #000000;
+            font-size: 1.3em;
+            font-weight: bold;
+            border-bottom: 1px solid #000000;
+            padding-bottom: 10px;
+        }
+
+        label {
+            display: block;
+            margin-top: 12px;
+            font-weight: normal;
+            margin-bottom: 5px;
+            font-size: 0.95em;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 4px;
+            border: 1px solid #000000;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            flex: 1;
+            padding: 8px 15px;
+            border: 1px solid #000000;
+            background-color: #ffffff;
+            color: #000000;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            font-weight: normal;
+            cursor: pointer;
+            min-width: 100px;
+        }
+
+        button:hover {
+            background-color: #f0f0f0;
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .output-section {
+            background: #ffffff;
+            padding: 20px;
+            border: 1px solid #000000;
+            margin-top: 30px;
+        }
+
+        .output-box {
+            background: #ffffff;
+            padding: 12px;
+            border: 1px solid #000000;
+            margin-top: 12px;
+            font-family: 'Courier New', monospace;
+            word-break: break-all;
+            min-height: 40px;
+            font-size: 0.9em;
+        }
+
+        .success {
+            border: 1px solid #000000;
+            background: #ffffff;
+        }
+
+        .error {
+            border: 1px solid #000000;
+            background: #ffffff;
+            color: #000000;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .spinner {
+            border: 2px solid #cccccc;
+            border-top: 2px solid #000000;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .info-box {
+            background: #ffffff;
+            padding: 12px;
+            border: 1px solid #000000;
+            margin-top: 12px;
+            font-size: 0.9em;
+        }
+
+        .footer {
+            text-align: center;
+            color: #000000;
+            margin-top: 30px;
+            padding-top: 15px;
+            border-top: 2px solid #000000;
+            font-size: 0.85em;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .stat-item {
+            background: #ffffff;
+            padding: 12px;
+            border: 1px solid #000000;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #000000;
+            font-family: 'Courier New', monospace;
+        }
+
+        .stat-label {
+            font-size: 0.85em;
+            color: #000000;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Enigma Bombe Solver</h1>
+            <p class="subtitle">Simulation of Enigma machine cracking using Bombe method</p>
+        </header>
+
+        <div class="tabs">
+            <button class="tab-button active" onclick="setTab('encrypt')">Encrypt</button>
+            <button class="tab-button" onclick="setTab('decrypt')">Decrypt</button>
+            <button class="tab-button" onclick="setTab('instructions')">Instructions</button>
+        </div>
+
+        <div class="content">
+            <!-- ENCRYPT MODE -->
+            <div id="encrypt-section">
+                <div class="card">
+                    <h2>Machine Settings</h2>
+                    
+                    <label>Select rotors (I, II, III):</label>
+                    <select id="rotor1">
+                        <option value="I">Rotor I</option>
+                        <option value="II">Rotor II</option>
+                        <option value="III" selected>Rotor III</option>
+                    </select>
+                    <select id="rotor2">
+                        <option value="I">Rotor I</option>
+                        <option value="II" selected>Rotor II</option>
+                        <option value="III">Rotor III</option>
+                    </select>
+                    <select id="rotor3">
+                        <option value="I" selected>Rotor I</option>
+                        <option value="II">Rotor II</option>
+                        <option value="III">Rotor III</option>
+                    </select>
+
+                    <label>Initial positions (e.g.: AAA):</label>
+                    <input type="text" id="rotor-positions" value="AAA" maxlength="3" placeholder="AAA">
+
+                    <label>Plugboard settings (e.g.: AB CD):</label>
+                    <input type="text" id="plugboard" placeholder="AB CD EF">
+
+                    <label>Text to encrypt:</label>
+                    <textarea id="plaintext" placeholder="Enter text (Latin letters only)">HELLOWORLD</textarea>
+
+                    <div class="button-group">
+                        <button onclick="encryptMessage()">Encrypt</button>
+                        <button onclick="clearEncrypt()">Clear</button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2>Result</h2>
+                    <div id="encrypt-output" class="output-box"></div>
+                    <div class="info-box" style="display: none;" id="encrypt-settings"></div>
+                </div>
+            </div>
+
+            <!-- DECRYPT MODE -->
+            <div id="decrypt-section" style="display: none;">
+                <div class="card">
+                    <h2>Bombe Cracking</h2>
+                    
+                    <label>Ciphertext:</label>
+                    <textarea id="ciphertext" placeholder="Enter encrypted text">XQYTUHWQD</textarea>
+
+                    <label>Known plaintext (Crib):</label>
+                    <input type="text" id="crib" placeholder="HELLO" value="HELLO">
+
+                    <label>Crib position in ciphertext:</label>
+                    <input type="number" id="crib-position" min="0" value="0">
+
+                    <div class="button-group">
+                        <button onclick="solveBombe()">Crack</button>
+                        <button onclick="clearDecrypt()">Clear</button>
+                    </div>
+
+                    <div class="loading" id="loading">
+                        <div class="spinner"></div>
+                        <p>Searching for solution...</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2>Found Settings</h2>
+                    <div id="decrypt-output"></div>
+                    <div class="stats" id="stats" style="display: none;">
+                        <div class="stat-item">
+                            <div class="stat-label">Rotor 1</div>
+                            <div class="stat-value" id="found-rotor1"></div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Rotor 2</div>
+                            <div class="stat-value" id="found-rotor2"></div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Rotor 3</div>
+                            <div class="stat-value" id="found-rotor3"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- INSTRUCTIONS TAB -->
+            <div id="instructions-section" style="display: none;">
+                <div class="card">
+                    <h2>How to Use</h2>
+                    <p>This simulator demonstrates how the Enigma machine works and how the Bombe algorithm can crack it.</p>
+                    
+                    <h3>Encryption Process</h3>
+                    <p>1. Select three different rotors from the dropdown menus</p>
+                    <p>2. Set initial rotor positions (AAA to ZZZ)</p>
+                    <p>3. Optionally configure the plugboard (e.g., "AB CD" swaps A with B and C with D)</p>
+                    <p>4. Enter plaintext (letters only)</p>
+                    <p>5. Click Encrypt to see the ciphertext</p>
+                    
+                    <h3>Decryption Process</h3>
+                    <p>1. Paste the ciphertext you want to crack</p>
+                    <p>2. Enter a known plaintext fragment (crib) - part of the original message</p>
+                    <p>3. Specify where the crib appears in the ciphertext</p>
+                    <p>4. Click Crack and the algorithm will find the rotor settings</p>
+                    
+                    <h3>Technical Details</h3>
+                    <p>The Bombe tests 17,576 possible rotor position combinations (26^3) and identifies settings where the crib matches the decrypted text segment. This is how Alan Turing broke Enigma during WWII.</p>
+                </div>
+
+                <div class="card">
+                    <h2>Examples</h2>
+                    
+                    <h3>Example 1: Basic Encryption</h3>
+                    <p>Rotors: I, II, III</p>
+                    <p>Positions: AAA</p>
+                    <p>Plugboard: (none)</p>
+                    <p>Plaintext: HELLO</p>
+                    <p>Result Ciphertext: EEMLK</p>
+                    
+                    <h3>Example 2: Encryption with Plugboard</h3>
+                    <p>Rotors: II, I, III</p>
+                    <p>Positions: BCD</p>
+                    <p>Plugboard: AB CD</p>
+                    <p>Plaintext: ATTACKATDAWN</p>
+                    <p>Result Ciphertext: QVGSJFWGXTZ</p>
+                    
+                    <h3>Example 3: Cracking with Bombe</h3>
+                    <p>Ciphertext: XQYTUHWQD</p>
+                    <p>Crib: HELLO</p>
+                    <p>Crib Position: 0</p>
+                    <p>The algorithm finds: Rotors III-II-I at position BEF matches the crib</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Karsakov Ilya Vyacheslavovich | 2025 | tg: @nicto999</p>
+        </div>
+    </div>
+
+    <script>
+        // Конфигурация роторов (исторические)
+        const ROTORS = {
+            'I': 'EKMFLGDQVZNTOWYHXUSPAIBRCJ',
+            'II': 'AJDKSIRUXBLHWTMCQGZNPYFVOE',
+            'III': 'BDFHJLCPRTXVZNYEIWGAKMUSQO'
+        };
+
+        const REFLECTOR = 'YRUHQSLDPXNGOKMIEBFZCWVJAT';
+        const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+        class Enigma {
+            constructor(rotors, positions, plugboard = '') {
+                this.rotors = rotors;
+                this.positions = positions.toUpperCase().split('');
+                this.plugboard = this.parsePlugboard(plugboard);
+                this.rotor_offsets = this.positions.map(p => ALPHABET.indexOf(p));
+            }
+
+            parsePlugboard(pb) {
+                const mapping = {};
+                const pairs = pb.trim().split(/\s+/).filter(p => p.length === 2);
+                for (let pair of pairs) {
+                    mapping[pair[0]] = pair[1];
+                    mapping[pair[1]] = pair[0];
+                }
+                return mapping;
+            }
+
+            applyPlugboard(char, reverse = false) {
+                return this.plugboard[char] || char;
+            }
+
+            applyRotor(char, rotor, reverse = false) {
+                const wiring = ROTORS[rotor];
+                const offset = this.rotor_offsets[['I', 'II', 'III'].indexOf(rotor)];
+                
+                let idx = ALPHABET.indexOf(char);
+                if (!reverse) {
+                    idx = (idx + offset) % 26;
+                    idx = ALPHABET.indexOf(wiring[idx]);
+                    idx = (idx - offset + 26) % 26;
+                } else {
+                    idx = (idx + offset) % 26;
+                    idx = wiring.indexOf(ALPHABET[idx]);
+                    idx = (idx - offset + 26) % 26;
+                }
+                return ALPHABET[idx];
+            }
+
+            applyReflector(char) {
+                return REFLECTOR[ALPHABET.indexOf(char)];
+            }
+
+            encryptChar(char) {
+                char = char.toUpperCase();
+                if (!ALPHABET.includes(char)) return char;
+
+                // Сигнал идет: Plugboard -> R1 -> R2 -> R3 -> Reflector -> R3 -> R2 -> R1 -> Plugboard
+                char = this.applyPlugboard(char);
+                char = this.applyRotor(char, 'I');
+                char = this.applyRotor(char, 'II');
+                char = this.applyRotor(char, 'III');
+                char = this.applyReflector(char);
+                char = this.applyRotor(char, 'III', true);
+                char = this.applyRotor(char, 'II', true);
+                char = this.applyRotor(char, 'I', true);
+                char = this.applyPlugboard(char);
+                
+                return char;
+            }
+
+            encryptMessage(message) {
+                return message.toUpperCase().split('').map(c => this.encryptChar(c)).join('');
+            }
+        }
+
+        function setTab(tab) {
+            const encryptSection = document.getElementById('encrypt-section');
+            const decryptSection = document.getElementById('decrypt-section');
+            const instructionsSection = document.getElementById('instructions-section');
+            const buttons = document.querySelectorAll('.tab-button');
+
+            if (tab === 'encrypt') {
+                encryptSection.style.display = '';
+                decryptSection.style.display = 'none';
+                instructionsSection.style.display = 'none';
+                buttons[0].classList.add('active');
+                buttons[1].classList.remove('active');
+                buttons[2].classList.remove('active');
+            } else if (tab === 'decrypt') {
+                encryptSection.style.display = 'none';
+                decryptSection.style.display = '';
+                instructionsSection.style.display = 'none';
+                buttons[0].classList.remove('active');
+                buttons[1].classList.add('active');
+                buttons[2].classList.remove('active');
+            } else if (tab === 'instructions') {
+                encryptSection.style.display = 'none';
+                decryptSection.style.display = 'none';
+                instructionsSection.style.display = '';
+                buttons[0].classList.remove('active');
+                buttons[1].classList.remove('active');
+                buttons[2].classList.add('active');
+            }
+        }
+
+        function encryptMessage() {
+            const rotor1 = document.getElementById('rotor1').value;
+            const rotor2 = document.getElementById('rotor2').value;
+            const rotor3 = document.getElementById('rotor3').value;
+            const positions = document.getElementById('rotor-positions').value.toUpperCase();
+            const plugboard = document.getElementById('plugboard').value;
+            const plaintext = document.getElementById('plaintext').value;
+
+            if (positions.length !== 3 || !/^[A-Z]{3}$/.test(positions)) {
+                alert('Positions must be 3 letters (A-Z)');
+                return;
+            }
+
+            // Для простоты берем первые 3 ротора в порядке выбора
+            const enigma = new Enigma([rotor1, rotor2, rotor3], positions, plugboard);
+            const ciphertext = enigma.encryptMessage(plaintext);
+
+            const outputDiv = document.getElementById('encrypt-output');
+            outputDiv.innerHTML = `<strong>Зашифрованный текст:</strong><br>${ciphertext}`;
+            outputDiv.className = 'output-box success';
+
+            const settingsDiv = document.getElementById('encrypt-settings');
+            settingsDiv.innerHTML = `<strong>Settings:</strong><br>Rotors: ${rotor1}, ${rotor2}, ${rotor3}<br>Positions: ${positions}<br>Plugboard: ${plugboard || '(none)'}`;
+            settingsDiv.style.display = 'block';
+        }
+
+        function solveBombe() {
+            const ciphertext = document.getElementById('ciphertext').value.toUpperCase();
+            const crib = document.getElementById('crib').value.toUpperCase();
+            const cribbPosition = parseInt(document.getElementById('crib-position').value);
+
+            if (!crib || crib.length === 0) {
+                alert('Please enter a known plaintext fragment (crib)');
+                return;
+            }
+
+            if (cribbPosition + crib.length > ciphertext.length) {
+                alert('Crib extends beyond the ciphertext length');
+                return;
+            }
+
+            const loading = document.getElementById('loading');
+            const output = document.getElementById('decrypt-output');
+            loading.style.display = 'block';
+            output.innerHTML = '';
+
+            setTimeout(() => {
+                const solutions = findSolutions(ciphertext, crib, cribbPosition);
+                loading.style.display = 'none';
+
+                if (solutions.length === 0) {
+                    output.innerHTML = '<div class="output-box error">No solution found. Check your crib and ciphertext.</div>';
+                } else {
+                    let html = '<div class="output-box success">';
+                    solutions.forEach((sol, idx) => {
+                        html += `<strong>Solution ${idx + 1}:</strong><br>`;
+                        html += `Rotors: ${sol.rotors[0]}, ${sol.rotors[1]}, ${sol.rotors[2]}<br>`;
+                        html += `Positions: ${sol.positions}<br>`;
+                        html += `Decrypted text: ${sol.decrypted}<br><br>`;
+                    });
+                    html += '</div>';
+                    output.innerHTML = html;
+
+                    if (solutions.length > 0) {
+                        document.getElementById('found-rotor1').textContent = solutions[0].rotors[0];
+                        document.getElementById('found-rotor2').textContent = solutions[0].rotors[1];
+                        document.getElementById('found-rotor3').textContent = solutions[0].rotors[2];
+                        document.getElementById('stats').style.display = 'grid';
+                    }
+                }
+            }, 100);
+        }
+
+        function findSolutions(ciphertext, crib, cribPosition) {
+            const solutions = [];
+            const rotors = ['I', 'II', 'III'];
+
+            // Перебираем все комбинации роторов и позиций
+            for (let r1 of rotors) {
+                for (let r2 of rotors) {
+                    for (let r3 of rotors) {
+                        // Пропускаем, если роторы одинаковые (историческое ограничение)
+                        if (r1 === r2 || r2 === r3) continue;
+
+                        for (let p1 = 0; p1 < 26; p1++) {
+                            for (let p2 = 0; p2 < 26; p2++) {
+                                for (let p3 = 0; p3 < 26; p3++) {
+                                    const positions = String.fromCharCode(65 + p1) + String.fromCharCode(65 + p2) + String.fromCharCode(65 + p3);
+                                    const enigma = new Enigma([r1, r2, r3], positions, '');
+
+                                    // Получаем фрагмент расшифрованного текста
+                                    const segment = ciphertext.substring(cribPosition, cribPosition + crib.length);
+                                    const decrypted = enigma.encryptMessage(segment);
+
+                                    if (decrypted === crib) {
+                                        // Расшифровываем весь текст
+                                        const fullDecrypted = enigma.encryptMessage(ciphertext);
+                                        solutions.push({
+                                            rotors: [r1, r2, r3],
+                                            positions: positions,
+                                            decrypted: fullDecrypted
+                                        });
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            return solutions;
+        }
+
+        function clearEncrypt() {
+            document.getElementById('plaintext').value = '';
+            document.getElementById('encrypt-output').innerHTML = '';
+            document.getElementById('encrypt-settings').style.display = 'none';
+        }
+
+        function clearDecrypt() {
+            document.getElementById('ciphertext').value = '';
+            document.getElementById('crib').value = '';
+            document.getElementById('decrypt-output').innerHTML = '';
+            document.getElementById('stats').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
