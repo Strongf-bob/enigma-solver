@@ -1,38 +1,31 @@
-# Enigma Bombe Solver
-
-> A modern software simulation of Alan Turing's legendary Bombe machine — breaking Enigma encryption through cryptanalysis
-
-***
+<p align="center">
+  <img src="./assets/readme/hero.svg" width="100%" alt="Enigma Bombe Solver — a browser-based three-rotor Enigma and crib search">
+</p>
 
 ## Overview
 
-This project is an **interactive cryptography simulator** that demonstrates how the Enigma machine worked and how the Bombe algorithm cracked it during WWII.
-
+This single-file browser application combines a three-rotor Enigma simulation
+with an educational crib-based search over rotor positions. It runs locally
+without a server or build step.
 
 | Feature | Description |
 | :-- | :-- |
 | **Enigma Simulation** | Authentic 3-rotor encryption machine with historical wiring |
 | **Bombe Cracking**    | Brute-force cryptanalysis using known plaintext attacks |
-| **Web Interface** | No installation needed — just open `index.html` in a browser |
+| **Web Interface** | No installation needed — open `Enigma Bombe Solver.html` in a browser |
 | **Educational** | Learn about cryptography, algorithms, and computing history |
-
-
-***
 
 ## Quick Start
 
-**Just open `index.html` in your web browser — that's it!**
+**Open `Enigma Bombe Solver.html` in your web browser.**
 
 No Python installation, no server setup required. The entire application runs directly in your browser.
 
 ```
-enigma-bombe-project/
-├── index.html              ← Open this in your browser!
-└── README.md               ← This file
+enigma-solver/
+├── Enigma Bombe Solver.html   ← open this file
+└── README.md
 ```
-
-
-***
 
 ## Features
 
@@ -221,4 +214,3 @@ This is an **educational project** created for **portfolio purposes**. Use freel
 [^1]: https://github.com/Strongf-bob/enigma-solver
 
 [^2]: README.md
-
